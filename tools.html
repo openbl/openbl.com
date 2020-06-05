@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tools</title>
+
+    <style>
+      body {
+        font-family: helvetica, arial, sans-serif;
+        margin: 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      body > * {
+        margin: 0.5em 0;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="input" name="input"></textarea>
+    <div class="controls">
+      <button id="encode">
+        Encode
+      </button>
+      <button id="decode">
+        Decode
+      </button>
+    </div>
+    <div id="output"></div>
+
+    <script>
+      var input = document.querySelector("#input");
+      var encode = document.querySelector("#encode");
+      var decode = document.querySelector("#decode");
+      var output = document.querySelector("#output");
+
+      encode.addEventListener("click", function(event) {
+        output.innerHTML = encodeURIComponent(input.value);
+      });
+
+      decode.addEventListener("click", function(event) {
+        output.innerHTML = decodeURIComponent(input.value);
+      });
+    </script>
+  </body>
+</html>
