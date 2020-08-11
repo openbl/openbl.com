@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Winner! Winner!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      body > * {
+        margin: 0.5em 0;
+      }
+    
+      
+      #picked {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="names" rows="10" placeholder="Enter names here!"></textarea>
+    <div id="controls">
+      <button id="pick">
+        Pick
+      </button>
+      <button id="shuffle">
+        Shuffle
+      </button>
+      <button id="clear">
+        Clear
+      </button>
+    </div>
+    <div>The winner is <span id="picked">&#129345;</span></div>
+  </body>
+  
+  <script>
+    const pick = function () {
+      let names = document.querySelector("#names").value.split("\n");
+      let pick = Math.floor(Math.random() * names.length);
+      let picked = document.querySelector("#picked");
+      picked.innerHTML = names[pick];
+    }
+
+    const shuffle = function() {
+      let names = document.querySelector("#names");
+      names.value = shuffleNames(names.value.split("\n")).join("\n");
+    };
+
+    const shuffleNames = function(names) {
+      const shuffledNames = names;
+
+      for (let i = shuffledNames.length-1; i > 0; i--) {
+        let j = Math.floor(Math.random() * i);
+        let temp = shuffledNames[i];
+        shuffledNames[i] = shuffledNames[j];
+        shuffledNames[j] = temp;
+      }
+
+      return shuffledNames;
+    }
+    
+    const clear = function() {
+      document.querySelector("#picked").innerHTML = "&#129345;";
+    }
+
+    const pickButton = document.querySelector("#pick");
+    pickButton.addEventListener("click", pick);
+
+    const shuffleButton = document.querySelector("#shuffle");
+    shuffleButton.addEventListener("click", shuffle);
+
+    const clearButton = document.querySelector("#clear");
+    clearButton.addEventListener("click", clear);
+  </script>
+</html>
