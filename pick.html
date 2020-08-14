@@ -42,7 +42,7 @@
   </body>
   
   <script>
-    document.querySelector("#names").value = mew URLSearchParams(document.location.search.substring(1))
+    document.querySelector("#names").value = new URLSearchParams(document.location.search.substring(1))
       .get("names")
       .split(",")
       .join("\n");
