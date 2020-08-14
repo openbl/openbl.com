@@ -42,6 +42,11 @@
   </body>
   
   <script>
+    document.querySelector("#names").value = mew URLSearchParams(document.location.search.substring(1))
+      .get("names")
+      .split(",")
+      .join("\n");
+
     const pick = function () {
       let names = document.querySelector("#names").value.split("\n");
       let pick = Math.floor(Math.random() * names.length);
