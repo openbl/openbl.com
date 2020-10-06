@@ -42,47 +42,50 @@
   </body>
   
   <script>
-    document.querySelector("#names").value = new URLSearchParams(document.location.search.substring(1))
-      .get("names")
-      .split(",")
-      .join("\n");
-
-    const pick = function () {
-      let names = document.querySelector("#names").value.split("\n");
-      let pick = Math.floor(Math.random() * names.length);
-      let picked = document.querySelector("#picked");
-      picked.innerHTML = names[pick];
-    }
-
-    const shuffle = function() {
-      let names = document.querySelector("#names");
-      names.value = shuffleNames(names.value.split("\n")).join("\n");
-    };
-
-    const shuffleNames = function(names) {
-      const shuffledNames = names;
-
-      for (let i = shuffledNames.length-1; i > 0; i--) {
-        let j = Math.floor(Math.random() * i);
-        let temp = shuffledNames[i];
-        shuffledNames[i] = shuffledNames[j];
-        shuffledNames[j] = temp;
+    window.onload = function () {
+      const params = new URLSearchParams(document.location.search.substring(1));
+      const namesParams = params.get("names");
+      if (namesParams !== null) {
+        document.querySelector("#names").value = namesParams.split(",").join("\n");
       }
 
-      return shuffledNames;
-    }
-    
-    const clear = function() {
-      document.querySelector("#picked").innerHTML = "&#129345;";
-    }
+      const pick = function () {
+        let names = document.querySelector("#names").value.split("\n");
+        let pick = Math.floor(Math.random() * names.length);
+        let picked = document.querySelector("#picked");
+        picked.innerHTML = names[pick];
+      }
 
-    const pickButton = document.querySelector("#pick");
-    pickButton.addEventListener("click", pick);
+      const shuffle = function() {
+        let names = document.querySelector("#names");
+        names.value = shuffleNames(names.value.split("\n")).join("\n");
+      };
 
-    const shuffleButton = document.querySelector("#shuffle");
-    shuffleButton.addEventListener("click", shuffle);
+      const shuffleNames = function(names) {
+        const shuffledNames = names;
 
-    const clearButton = document.querySelector("#clear");
-    clearButton.addEventListener("click", clear);
+        for (let i = shuffledNames.length-1; i > 0; i--) {
+          let j = Math.floor(Math.random() * i);
+          let temp = shuffledNames[i];
+          shuffledNames[i] = shuffledNames[j];
+          shuffledNames[j] = temp;
+        }
+
+        return shuffledNames;
+      }
+
+      const clear = function() {
+        document.querySelector("#picked").innerHTML = "&#129345;";
+      }
+
+      const pickButton = document.querySelector("#pick");
+      pickButton.addEventListener("click", pick);
+
+      const shuffleButton = document.querySelector("#shuffle");
+      shuffleButton.addEventListener("click", shuffle);
+
+      const clearButton = document.querySelector("#clear");
+      clearButton.addEventListener("click", clear);
+    };
   </script>
 </html>
