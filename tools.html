@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Tools</title>
 
@@ -15,36 +15,152 @@
         flex-direction: column;
         align-items: center;
       }
+      
+      .row {
+        display: flex;
+        justify-content: space-evenly;
+      }
 
-      body > * {
-        margin: 0.5em 0;
+      .col {
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        border: solid 0.1rem;
+      }
+
+      .errors {
+        color: red;
       }
     </style>
   </head>
   <body>
-    <textarea id="input" name="input"></textarea>
-    <div class="controls">
-      <button id="encode">
-        Encode
-      </button>
-      <button id="decode">
-        Decode
-      </button>
+    <div class="row">
+      <textarea id="input"></textarea>
     </div>
-    <div id="output"></div>
+    <div class="row">
+      <div id="btoa" class="col">
+        <div class="title">
+          btoa()
+        </div>
+        <div class="errors">
+
+        </div>
+        <div class="output">
+
+        </div>
+      </div>
+      <div id="atob" class="col">
+        <div class="title">
+          atob()
+        </div>
+        <div class="errors">
+
+        </div>
+        <div class="output">
+
+        </div>
+      </div>
+
+      <div id="encodeURI" class="col">
+        <div class="title">
+          encodeURI()
+        </div>
+        <div class="errors">
+
+        </div>
+        <div class="output">
+
+        </div>
+      </div>
+
+      <div id="encodeURIComponent" class="col">
+        <div class="title">
+          encodeURIComponent()
+        </div>
+        <div class="errors">
+
+        </div>
+        <div class="output">
+
+        </div>
+      </div>
+
+      <div id="decodeURI" class="col">
+        <div class="title">
+          decodeURI()
+        </div>
+        <div class="errors">
+
+        </div>
+        <div class="output">
+
+        </div>
+      </div>
+
+      <div id="decodeURIComponent" class="col">
+        <div class="title">
+          decodeURIComponent()
+        </div>
+        <div class="errors">
+
+        </div>
+        <div class="output">
+
+        </div>
+      </div>
+    </div>
 
     <script>
       var input = document.querySelector("#input");
-      var encode = document.querySelector("#encode");
-      var decode = document.querySelector("#decode");
-      var output = document.querySelector("#output");
 
-      encode.addEventListener("click", function(event) {
-        output.innerHTML = encodeURIComponent(input.value);
-      });
+      var outputs = [{
+          fn: (x) => {
+            return btoa(x);
+          },
+          output: document.querySelector("#btoa")
+        },
+        {
+          fn: (x) => {
+            return atob(x);
+          },
+          output: document.querySelector("#atob")
+        },
+        {
+          fn: (x) => {
+            return encodeURI(x);
+          },
+          output: document.querySelector("#encodeURI")
+        },
+        {
+          fn: (x) => {
+            return encodeURIComponent(x);
+          },
+          output: document.querySelector("#encodeURIComponent")
+        },
+        {
+          fn: (x) => {
+            return decodeURI(x);
+          },
+          output: document.querySelector("#decodeURI")
+        },
+        {
+          fn: (x) => {
+            return decodeURIComponent(x);
+          },
+          output: document.querySelector("#decodeURIComponent")
+        }
+      ];
 
-      decode.addEventListener("click", function(event) {
-        output.innerHTML = decodeURIComponent(input.value);
+      input.addEventListener("keyup", function() {
+        outputs.forEach((output) => {
+          try {
+            output.output.querySelector('.output').innerHTML = output.fn(input.value);
+            output.output.querySelector('.errors').innerHTML = '';
+          } catch (error) {
+            output.output.querySelector('.errors').innerHTML = error;
+          }
+        })
       });
     </script>
   </body>
