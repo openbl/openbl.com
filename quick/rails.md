@@ -14,7 +14,7 @@ This is helpful if you have a custome reader method that you want to circumvent,
 [Docs](https://api.rubyonrails.org/classes/ActiveRecord/AttributeMethods/Read.html#method-i-read_attribute)
 
 <dl>
-  <dt>read_attribute(attr_name, &block)Link</dt>
+  <dt>read_attribute(attr_name, &block)</dt>
   <dd>Returns the value of the attribute identified by attr_name after it has been typecast (for example, “2004-12-12” in a date column is cast to a date object, like Date.new(2004, 12, 12)).</dd>
 </dl>
 
