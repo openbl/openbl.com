@@ -31,3 +31,13 @@ new_logger = Logger.new(StringIO.new)
 
 Rails.logger.extend(ActiveSupport::Logger.broadcast(new_logger))
 ```
+
+### Array
+
+#### Array.wrap vs Kernel#Array
+
+Array.wrap only coerces with `#to_ary` and does not type checking.
+
+Kerenl#Array calls `to_ary`, then `#to_a`, and type checks to ensure it's either `nil` or an `Array`.
+
+[Array.wrap vs Kernel#Array]([url](https://www.mendelowski.com/docs/ruby/array-wrap-vs-kernel-array/))
